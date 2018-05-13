@@ -2,8 +2,11 @@ package com.bassam.model.entiti;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -16,7 +19,7 @@ public class Student {
 	@GeneratedValue
 	@Column(name = "Id")
 	private Integer id;
-	
+
 	@NotNull(message = "you have to specify first name")
 	@Column(name = "First_Name")
 	private String firstName;
@@ -32,8 +35,12 @@ public class Student {
 	private Integer age;
 
 	@NotNull(message = "gender must be set")
-	@Column( name = "Gender")
+	@Column(name = "Gender")
 	private String gender;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "university_id")
+	private University university;
 
 	public Student() {
 
@@ -77,6 +84,14 @@ public class Student {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public University getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(University university) {
+		this.university = university;
 	}
 
 	@Override

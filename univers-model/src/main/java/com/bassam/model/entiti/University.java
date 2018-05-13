@@ -56,6 +56,6 @@ public class University {
 
 	@Override
 	public String toString() {
-		return universityName + universityCountry + universityCity; 
+		return this.universityName;
 	}
 }
